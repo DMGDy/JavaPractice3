@@ -17,6 +17,15 @@ public class DatabaseController<K> {
     } else { return -1; }
   }
 
+  // overload for case to have an array of members 
+  public int addItem(Object[] members) {
+    if(!db.isFull()) {
+      db.add(members);
+      return 0;
+    } else { return -1; }
+  }
+
+
   public int showAll() {
     if(db.isEmpty()) {
       return -1;
@@ -58,10 +67,11 @@ public class DatabaseController<K> {
   public int sortedShowAll(String field, String order) {
     if(db.isEmpty()) { return -1; }
     switch(order) {
-      case "in-order":
+      case "d":
         db.sortAscending(field);
         break;
-      case "reversed":
+      case "a":
+        db.sortDescending(field);
         break;
     }
     return 0;
